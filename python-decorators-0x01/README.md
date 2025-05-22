@@ -53,16 +53,16 @@ Each task builds upon the last, culminating in a set of reusable, robust decorat
 
 **Objective**: Create @transactional to manage DB transactions (commit on success, rollback on error).
 
-**Solution:** [Transaction Management Decorator]('./2-transactional.py')
+**Solution:** [Transaction Management Decorator](2-transactional.py)
 
 ### `3-retry_on_failure.py` - **Retry on Failure Decorator**
 
 **Objective:** Implement retry_on_failure(retries=3, delay=2) decorator to handle transient errors.
 
-**Solution:** [Retry on Failure Decorator]('./3-retry_on_failure.py')
+**Solution:** [Retry on Failure Decorator](3-retry_on_failure.py)
 
 ### `4-cache_query.py` - **Query Result Caching**
 
 **Objective:** Implement cache_query decorator to avoid redundant DB calls by caching results.
 
-**Solution:** [Query Result Caching]('./4-cache_query.py')
+**Solution:** [Query Result Caching](4-cache_query.py)
