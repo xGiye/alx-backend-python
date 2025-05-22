@@ -41,13 +41,13 @@ Each task builds upon the last, culminating in a set of reusable, robust decorat
 
 **Objective:** Implement `log_queries` decorator that logs every SQL query before execution.
 
-**Solution:** [Log queries]('0-log_queries.py')
+**Solution:** [Log queries](0-log_queries.py)
 
 ### `1-with_db_connection.py` - **Database Connection Decorator**
 
 **Objective**: Implement with_db_connection to automatically open and close SQLite connections.
 
-**Solution:** [Database Connection Decorator]('1-with_db_connection.py')
+**Solution:** [Database Connection Decorator](1-with_db_connection.py)
 
 ### `2-transactional.py` - **Transaction Management Decorator**
 
