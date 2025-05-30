@@ -9,7 +9,6 @@ from utils import access_nested_map, get_json, memoize
 
 class TestAccessNestedMap(unittest.TestCase):
     """Tests for access_nested_map"""
-    
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
@@ -26,7 +25,6 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as cm:
             access_nested_map(nested_map, path)
         self.assertEqual(str(cm.exception), repr(path[-1]))
-        
         
 class TestGetJson(unittest.TestCase):
     """Unit tests for the get_json function in utils.py."""
@@ -48,14 +46,10 @@ class TestGetJson(unittest.TestCase):
         #     result = get_json(test_url)
         #     mock_get.assert_called_once_with(test_url)
         #     self.assertEqual(result, test_payload)
-        
-
         mock_response = Mock()
         mock_response.json.return_value = test_payload
         mock_get.return_value = mock_response
-
         result = get_json(test_url)
-
         mock_get.assert_called_once_with(test_url)
         self.assertEqual(result, test_payload)
 
@@ -90,14 +84,15 @@ class TestMemoize(unittest.TestCase):
 
         with patch.object(TestClass, "a_method", return_value=42) as mock_method:
             obj = TestClass()
+            
             # First access: triggers the actual method call
             self.assertEqual(obj.a_property, 42)
+            
             # Second access: should return cached result, not call the method again
             self.assertEqual(obj.a_property, 42)
+            
             # Ensure the method was called exactly once
             mock_method.assert_called_once()
-
-
 
 class TestGithubOrgClient(unittest.TestCase):
     """Tests for GithubOrgClient"""
@@ -125,6 +120,6 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_get_json.assert_called_once_with("https://api.github.com/orgs/test_org/repos")
 
 
-
 if __name__ == "__main__":
     unittest.main()
+    
