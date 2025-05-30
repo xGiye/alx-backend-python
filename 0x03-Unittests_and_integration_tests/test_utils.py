@@ -32,11 +32,11 @@ class TestGetJson(unittest.TestCase):
     """Unit tests for the get_json function in utils.py."""
 
     @parameterized.expand([
-        ("example_com", "http://example.com", {"payload": True}),
-        ("holberton_io", "http://holberton.io", {"payload": False}),
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
     ])
     @patch("utils.requests.get")
-    def test_get_json(self, name, test_url, test_payload, mock_get):
+    def test_get_json(self, test_url, test_payload, mock_get):
         """
         Test that get_json returns the correct JSON response
         and that requests.get is called with the correct URL.
