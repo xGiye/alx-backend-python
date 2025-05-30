@@ -29,15 +29,20 @@ class TestAccessNestedMap(unittest.TestCase):
         
         
 class TestGetJson(unittest.TestCase):
-    """Tests for get_json"""
+    """Unit tests for the get_json function in utils.py."""
 
     @parameterized.expand([
-        ("http://example.com", {"payload": True}),
-        ("http://holberton.io", {"payload": False}),
+        ("example_com", "http://example.com", {"payload": True}),
+        ("holberton_io", "http://holberton.io", {"payload": False}),
     ])
-    def test_get_json(self, test_url, test_payload):
+    def test_get_json(self, name, test_url, test_payload):
+        """
+        Test that get_json returns the correct JSON response
+        and that requests.get is called with the correct URL.
+        """
         mock_response = Mock()
         mock_response.json.return_value = test_payload
+
         with patch("utils.requests.get", return_value=mock_response) as mock_get:
             result = get_json(test_url)
             mock_get.assert_called_once_with(test_url)
@@ -45,15 +50,21 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """Tests for memoize"""
+    """Unit tests for the memoize decorator in utils.py."""
 
     def test_memoize(self):
+        """
+        Test that memoize caches the result of a method
+        so the method is only called once, even on multiple accesses.
+        """
         class TestClass:
             def a_method(self):
+                """Returns a fixed value (42)."""
                 return 42
 
             @memoize
             def a_property(self):
+                """Returns result of a_method, memoized."""
                 return self.a_method()
 
         with patch.object(TestClass, "a_method", return_value=42) as mock:
