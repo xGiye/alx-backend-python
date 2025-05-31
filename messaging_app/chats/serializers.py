@@ -8,6 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['user_id', 'username', 'email', 'first_name', 'last_name', 'phone_number']
+        extrs_kwargs = {'password': {'write_only':True}}
 
 
 # Message Serializer
@@ -23,15 +24,17 @@ class MessageSerializer(serializers.ModelSerializer):
         if not value.strip():
             raise serializers.ValidationError("Message body cannot be empty.")
         return value
+    
+    
 # Conversation Serializer
 
 class ConversationSerializer(serializers.ModelSerializer):
     participants = UserSerializer(many=True, read_only=True)
-    messages = MessageSerializer(many=True, read_only=True)
+    messages = serializers.SerializerMethodField()  # SerializerMethodField usage
 
     class Meta:
         model = Conversation
-        fields = ['conversation_id', 'participants', 'messages', 'created_at']
+        fields = ['conversation_id', 'participants', 'created_at', 'messages']
 
     def get_messages(self, obj):
         messages = obj.messages.all()  # reverse relation from Message model
