@@ -149,11 +149,12 @@ class MessageViewSet(viewsets.ModelViewSet):
     # filter_backends = [filters.SearchFilter]
     
     pagination_class = MessagePagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = MessageFilter
     
     
     search_fields = ['message_body', 'sender__username']
+    ordering_fields = ['created_at']
 
     def get_queryset(self):
         # Return only messages from conversations the user is part of
